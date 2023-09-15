@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UploadImage from "../components/UploadImage";
+import { useAlert } from "react-alert";
 
 function Register() {
   const [form, setForm] = useState({
@@ -13,6 +14,7 @@ function Register() {
   });
 
   const navigate = useNavigate();
+  const alert=useAlert()
 
   // Handling Input change for registration form.
   const handleInputChange = (e) => {
@@ -29,13 +31,13 @@ function Register() {
       body: JSON.stringify(form),
     })
       .then((result) => {
-        alert("Successfully Registered, Now Login with your details");
+        alert.success("Successfully Registered, Now Login with your details");
         navigate('/login')
         
       })
       .catch((err) => console.log(err));
   };
-  // ------------------
+  
 
   // Uploading image to cloudinary
   const uploadImage = async (image) => {
@@ -50,7 +52,7 @@ function Register() {
       .then((res) => res.json())
       .then((data) => {
         setForm({ ...form, imageUrl: data.url });
-        alert("Image Successfully Uploaded");
+        alert.success("Image Successfully Uploaded");
       })
       .catch((error) => console.log(error));
   };

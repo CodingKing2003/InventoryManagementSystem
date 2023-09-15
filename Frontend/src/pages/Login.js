@@ -2,6 +2,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../AuthContext";
+import { useAlert } from "react-alert";
 
 function Login() {
   const [form, setForm] = useState({
@@ -11,6 +12,7 @@ function Login() {
 
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+  const alert=useAlert()
 
 
   const handleInputChange = (e) => {
@@ -22,14 +24,14 @@ function Login() {
       fetch("http://localhost:4000/api/login")
         .then((response) => response.json())
         .then((data) => {
-          alert("Successfully Login");
+          alert.success("Successfully Logged In")
           localStorage.setItem("user", JSON.stringify(data));
           authContext.signin(data._id, () => {
             navigate("/");
           });
         })
         .catch((err) => {
-          alert("Wrong credentials, Try again")
+          alert.error("Invalid username or password")
           console.log(err);
         });
     }, 3000);
@@ -38,7 +40,7 @@ function Login() {
   const loginUser = (e) => {
     // Cannot send empty data
     if (form.email === "" || form.password === "") {
-      alert("To login user, enter details to proceed...");
+      alert.error("To login user, enter details to proceed...");
     } else {
       fetch("http://localhost:4000/api/login", {
         method: "POST",
@@ -79,14 +81,7 @@ function Login() {
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
               Signin to your account
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600">
-              Or
-              <span
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                start your 14-day free trial
-              </span>
-            </p>
+            
           </div>
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             {/* <input type="hidden" name="remember" defaultValue="true" /> */}

@@ -70,6 +70,7 @@ function Dashboard() {
 
   // Update Chart Data
   const updateChartData = (salesData) => {
+    console.log("Updating chart data with:", salesData);
     setChart({
       ...chart,
       series: [
@@ -125,12 +126,23 @@ function Dashboard() {
   };
 
   // Fetching Monthly Sales
-  const fetchMonthlySalesData = () => {
-    fetch(`http://localhost:4000/api/sales/getmonthly`)
-      .then((response) => response.json())
-      .then((datas) => updateChartData(datas.salesAmount))
-      .catch((err) => console.log(err));
-  };
+
+
+    
+    
+
+    const fetchMonthlySalesData = () => {
+      fetch(`http://localhost:4000/api/sales/getmonthly`)
+        .then((response) => response.json())
+        .then((datas) => {
+          console.log("Fetched data:", datas); // Add this line
+          updateChartData(datas.salesAmount);
+        })
+        .catch((err) => console.log(err));
+
+  }
+  
+  
 
   return (
     <>

@@ -47,32 +47,27 @@ function PurchaseDetails() {
   };
 
   return (
-    <div className="col-span-12 lg:col-span-10  flex justify-center">
-      <div className=" flex flex-col gap-5 w-11/12">
-        {showPurchaseModal && (
-          <AddPurchaseDetails
-            addSaleModalSetting={addSaleModalSetting}
-            products={products}
-            handlePageUpdate={handlePageUpdate}
-            authContext = {authContext}
-          />
-        )}
+    <div className="col-span-12 lg:col-span-10 p-4 flex justify-center">
+  <div className="flex flex-col gap-5 w-11/12">
+    {showPurchaseModal && (
+      <AddPurchaseDetails
+        addSaleModalSetting={addSaleModalSetting}
+        products={products}
+        handlePageUpdate={handlePageUpdate}
+        authContext={authContext}
+      />
+    )}
         {/* Table  */}
-        <div className="overflow-x-auto rounded-lg border bg-white border-gray-200 ">
-          <div className="flex justify-between pt-5 pb-3 px-3">
-            <div className="flex gap-4 justify-center items-center ">
-              <span className="font-bold">Purchase Details</span>
-            </div>
-            <div className="flex gap-4">
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 text-xs  rounded"
-                onClick={addSaleModalSetting}
-              >
-                {/* <Link to="/inventory/add-product">Add Product</Link> */}
-                Add Purchase
-              </button>
-            </div>
-          </div>
+        <div className="bg-white rounded-lg shadow-md">
+      <div className="flex justify-between items-center p-4">
+        <h1 className="text-2xl font-semibold">Purchase Details</h1>
+        <button
+          onClick={addSaleModalSetting}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded"
+        >
+          Add Purchase
+        </button>
+      </div>
           <table className="min-w-full divide-y-2 divide-gray-200 text-sm">
             <thead>
               <tr>

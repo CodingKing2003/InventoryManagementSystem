@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import AddSale from "../components/AddSale";
 import AuthContext from "../AuthContext";
+import {useAlert} from "react-alert"
 
 function Sales() {
   const [showSaleModal, setShowSaleModal] = useState(false);
@@ -8,6 +9,8 @@ function Sales() {
   const [products, setAllProducts] = useState([]);
   const [stores, setAllStores] = useState([]);
   const [updatePage, setUpdatePage] = useState(true);
+
+  const alert=useAlert()
 
   const authContext = useContext(AuthContext);
 
@@ -23,6 +26,7 @@ function Sales() {
       .then((response) => response.json())
       .then((data) => {
         setAllSalesData(data);
+        // alert.success("Product Added")
       })
       .catch((err) => console.log(err));
   };
@@ -49,6 +53,7 @@ function Sales() {
   // Modal for Sale Add
   const addSaleModalSetting = () => {
     setShowSaleModal(!showSaleModal);
+    
   };
 
   // Handle Page Update

@@ -58,6 +58,8 @@ app.get("/api/login", (req, res) => {
 // ------------------------------------
 
 // Registration API
+// Registration API
+// Registration API
 app.post("/api/register", (req, res) => {
   let registerUser = new User({
     firstName: req.body.firstName,
@@ -71,12 +73,18 @@ app.post("/api/register", (req, res) => {
   registerUser
     .save()
     .then((result) => {
+      // Send a success response with status 200
       res.status(200).send(result);
-      alert("Signup Successfull");
     })
-    .catch((err) => console.log("Signup: ", err));
-  console.log("request: ", req.body);
+    .catch((err) => {
+      console.log("Signup: ", err);
+      // Send an error response with status 500
+      res.status(500).send("Registration failed");
+    });
 });
+
+
+
 
 
 app.get("/testget", async (req,res)=>{

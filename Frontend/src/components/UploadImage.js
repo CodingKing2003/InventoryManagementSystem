@@ -9,35 +9,45 @@ function UploadImage({ uploadImage }) {
   };
 
   return (
-    <div>
-      <label
-        htmlFor="fileInput"
-        className="inline-block rounded-md shadow-sm py-2 px-4 bg-gray-100 text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-      >
-        <svg
-          className="w-6 h-6 inline-block mr-2"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3 16V21H21V16H3ZM5 18H19V16H5V18ZM3 6H21V14H3V6ZM5 10H19V8H5V10Z"
-            fill="currentColor"
-          />
-        </svg>
-        <span className="inline-block">
-          {" "}
-          {fileName?.name ? fileName.name : "Choose file"}
-        </span>
+    <div className="mt-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Upload an Image
       </label>
-      <input
-        type="file"
-        id="fileInput"
-        className="hidden"
-        accept=".png, .jpeg, .jpg"
-        required
-        onChange={handleFileInputChange}
-      />
+      <div className="mt-1 flex items-center">
+        <span className="inline-block bg-gray-100 py-2 px-4 rounded-l-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            />
+          </svg>
+        </span>
+        <label
+          htmlFor="fileInput"
+          className="cursor-pointer bg-blue-500 hover:bg-blue-600 focus:bg-blue-600 text-white font-semibold rounded-r-md py-2 px-4 transition duration-300 ease-in-out"
+        >
+          Choose File
+        </label>
+        <input
+          type="file"
+          id="fileInput"
+          className="hidden"
+          accept=".png, .jpeg, .jpg"
+          required
+          onChange={handleFileInputChange}
+        />
+        <span className="ml-2 truncate">
+          {fileName?.name ? fileName.name : "No file chosen"}
+        </span>
+      </div>
     </div>
   );
 }

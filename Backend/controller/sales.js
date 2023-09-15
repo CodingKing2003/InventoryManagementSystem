@@ -19,9 +19,11 @@ const addSales = (req, res) => {
       res.status(200).send(result);
     })
     .catch((err) => {
+      console.error("Error adding sale:", err);
       res.status(402).send(err);
     });
 };
+
 
 // Get All Sales Data
 const getSalesData = async (req, res) => {

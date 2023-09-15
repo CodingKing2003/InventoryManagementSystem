@@ -4,23 +4,33 @@ const Sales = require("../models/sales");
 
 // Add Post
 const addProduct = (req, res) => {
-  console.log("req: ", req.body.userId);
-  const addProduct = new Product({
-    userID: req.body.userId,
-    name: req.body.name,
-    manufacturer: req.body.manufacturer,
-    stock: 0,
-    description: req.body.description,
-  });
-
-  addProduct
-    .save()
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((err) => {
-      res.status(402).send(err);
+  try {
+    
+    console.log("req: ", req.body.userId);
+    const addProduct =  Product.create({
+      userID: req.body.userId,
+      name: req.body.name,
+      manufacturer: req.body.manufacturer,
+      stock: 0,
+      description: req.body.description,
+      location:req.body.location,
+      quantity:req.body.quantity
     });
+  
+    console.log(addProduct)
+
+    res.status(200).json({
+      success:false,
+      addProduct
+    })
+  } catch (error) {
+    res.status(400).json({
+      success:false,
+      message:error.message
+    })
+  }
+
+  
 };
 
 // Get All Products
@@ -55,6 +65,8 @@ const updateSelectedProduct = async (req, res) => {
         name: req.body.name,
         manufacturer: req.body.manufacturer,
         description: req.body.description,
+        location:req.body.location,
+        quantity:req.body.quantity,
       },
       { new: true }
     );

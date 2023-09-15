@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import UploadImage from "./UploadImage";
 import AuthContext from "../AuthContext";
+import { useAlert } from "react-alert";
 
 export default function AddStore() {
   const authContext = useContext(AuthContext);
@@ -14,6 +15,8 @@ export default function AddStore() {
     city: "",
     image: "",
   });
+
+  const alert=useAlert()
 
   const handleInputChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +34,7 @@ export default function AddStore() {
       body: JSON.stringify(form),
     })
       .then((result) => {
-        alert("STORE ADDED");
+        alert.success("STORE ADDED");
         setOpen(false);
       })
       .catch((err) => console.log(err));
@@ -50,7 +53,7 @@ export default function AddStore() {
       .then((res) => res.json())
       .then((data) => {
         setForm({ ...form, image: data.url });
-        alert("Store Image Successfully Uploaded");
+        alert.success("Store Image Successfully Uploaded");
       })
       .catch((error) => console.log(error));
   };
